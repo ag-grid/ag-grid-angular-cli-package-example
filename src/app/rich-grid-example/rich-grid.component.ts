@@ -43,7 +43,8 @@ export class RichGridComponent {
             headerComponent: 'sortableHeaderComponent',
             headerComponentParams: {
                 menuIcon: 'fa-bars'
-            }
+            },
+            cellDataType: false,
         };
 
         this.components = {
