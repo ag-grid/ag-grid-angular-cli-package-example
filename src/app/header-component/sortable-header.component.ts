@@ -11,8 +11,8 @@ interface MyParams extends IHeaderParams {
     styleUrls: ['sortable-header.component.css']
 })
 export class SortableHeaderComponent implements OnDestroy, IHeaderAngularComp {
-    public params: MyParams;
-    public sorted: string;
+    public params!: MyParams;
+    public sorted!: string;
     private elementRef: ElementRef;
 
     constructor(elementRef: ElementRef) {
@@ -33,7 +33,7 @@ export class SortableHeaderComponent implements OnDestroy, IHeaderAngularComp {
         this.params.showColumnMenu(this.querySelector('.customHeaderMenuButton'));
     }
 
-    onSortRequested(order, event) {
+    onSortRequested(order: "asc" | "desc" | null, event: any) {
         this.params.setSort(order, event.shiftKey);
     };
 
@@ -53,7 +53,7 @@ export class SortableHeaderComponent implements OnDestroy, IHeaderAngularComp {
             '.customHeaderMenuButton', selector);
     }
 
-    refresh(params) : boolean {
+    refresh(params: MyParams): boolean {
         return true;
     }
 }

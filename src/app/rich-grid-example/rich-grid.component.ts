@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ColumnApi, GridApi } from 'ag-grid-community';
+import { ColDef, ColGroupDef, ICellRendererParams, CellContextMenuEvent, CellDoubleClickedEvent, CellClickedEvent, GridReadyEvent, GridApi, ColumnApi } from 'ag-grid-community';
 
 import { ProficiencyFilter } from '../filters/proficiency.component.filter';
 import { SkillFilter } from '../filters/skill.component.filter';
@@ -23,16 +23,16 @@ import { RendererComponent } from '../renderer-component/renderer.component';
     encapsulation: ViewEncapsulation.None
 })
 export class RichGridComponent {
-    public rowData: any[];
-    public columnDefs: any[];
-    public rowCount: string;
+    public rowData!: any[];
+    public columnDefs!: (ColDef | ColGroupDef)[];
+    public rowCount!: string;
 
-    public defaultColDef: any;
+    public defaultColDef: ColDef;
     public components: any;
-    public sideBar: false;
+    public sideBar!: boolean;
 
-    public api: GridApi;
-    public columnApi: ColumnApi;
+    public api!: GridApi;
+    public columnApi!: ColumnApi;
 
     constructor() {
         this.defaultColDef = {
@@ -126,7 +126,7 @@ export class RichGridComponent {
                         field: 'dob',
                         width: 195,
                         pinned: true,
-                        cellRenderer: (params) => {
+                        cellRenderer: (params: ICellRendererParams) => {
                             return pad(params.value.getDate(), 2) + '/' +
                                 pad(params.value.getMonth() + 1, 2) + '/' +
                                 params.value.getFullYear();
@@ -192,7 +192,7 @@ export class RichGridComponent {
         this.calculateRowCount();
     }
 
-    public onGridReady(params) {
+    public onGridReady(params: GridReadyEvent) {
         console.log('onGridReady');
 
         this.api = params.api;
@@ -203,19 +203,19 @@ export class RichGridComponent {
         this.calculateRowCount();
     }
 
-    public onCellClicked($event) {
+    public onCellClicked($event: CellClickedEvent) {
         console.log('onCellClicked: ' + $event.rowIndex + ' ' + $event.colDef.field);
     }
 
-    public onCellDoubleClicked($event) {
+    public onCellDoubleClicked($event: CellDoubleClickedEvent) {
         console.log('onCellDoubleClicked: ' + $event.rowIndex + ' ' + $event.colDef.field);
     }
 
-    public onCellContextMenu($event) {
+    public onCellContextMenu($event: CellContextMenuEvent) {
         console.log('onCellContextMenu: ' + $event.rowIndex + ' ' + $event.colDef.field);
     }
 
-    public onQuickFilterChanged($event) {
+    public onQuickFilterChanged($event: any) {
         this.api.setQuickFilter($event.target.value);
     }
 
@@ -226,7 +226,7 @@ export class RichGridComponent {
     }
 
     public dobFilter() {
-        this.api.getFilterInstance('dob', (dateFilterComponent) => {
+        this.api.getFilterInstance('dob', (dateFilterComponent: any) => {
             dateFilterComponent.setModel({
                 type: 'equals',
                 dateFrom: '2000-01-01'
@@ -235,11 +235,15 @@ export class RichGridComponent {
             this.api.onFilterChanged();
         });
     }
+
+    public toggleSidebar($event: any) {
+        this.sideBar = $event.target.checked;
+    }
 }
 
-function skillsCellRenderer(params) {
+function skillsCellRenderer(params: ICellRendererParams) {
     const data = params.data;
-    const skills = [];
+    const skills: string[] = [];
     RefData.IT_SKILLS.forEach(function(skill) {
         if (data && data.skills && data.skills[skill]) {
             skills.push(`<img src="images/skills/${skill}.png" width="16px" title="${skill}" />`);
@@ -248,7 +252,7 @@ function skillsCellRenderer(params) {
     return skills.join(' ');
 }
 
-function countryCellRenderer(params) {
+function countryCellRenderer(params: ICellRendererParams) {
     return `<img border='0' width='15' height='10' style='margin-bottom: 2px' src='images/flags/${RefData.COUNTRY_CODES[params.value]}.png'>${params.value}`;
 }
 
@@ -263,7 +267,7 @@ function createRandomPhoneNumber() {
     return result;
 }
 
-function percentCellRenderer(params) {
+function percentCellRenderer(params: ICellRendererParams) {
     const value = params.value;
 
     const eDivPercentBar = document.createElement('div');
@@ -289,10 +293,10 @@ function percentCellRenderer(params) {
     return eOuterDiv;
 }
 
-//Utility function used to pad the date formatting.
-function pad(num, totalStringSize) {
+// Utility function used to pad the date formatting.
+function pad(num: number, totalStringSize: number) {
     let asString = num + '';
-    while (asString.length < totalStringSize) asString = '0' + asString;
+    while (asString.length < totalStringSize) { asString = '0' + asString; }
     return asString;
 }
 
