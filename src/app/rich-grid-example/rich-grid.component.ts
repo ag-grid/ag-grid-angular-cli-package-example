@@ -5,11 +5,7 @@ import { ProficiencyFilter } from '../filters/proficiency.component.filter';
 import { SkillFilter } from '../filters/skill.component.filter';
 import RefData from '../data/refData';
 
-import 'ag-grid-enterprise';
 
-// set your key here
-// import {LicenseManager} from "ag-grid-enterprise";
-// LicenseManager.setLicenseKey(<your key>);
 
 import { HeaderGroupComponent } from '../header-group-component/header-group.component';
 import { DateComponent } from '../date-component/date.component';
