@@ -2,15 +2,14 @@ import {Component, OnDestroy} from "@angular/core";
 import {IDateParams} from "ag-grid-community";
 import {IDateAngularComp} from "ag-grid-angular";
 
-
 @Component({
     selector: 'ag-full-width-grid',
     templateUrl: 'date.component.html',
     styleUrls: ['date.component.css'],
 })
 export class DateComponent implements OnDestroy, IDateAngularComp {
-    private date: Date;
-    private params: IDateParams;
+    private date!: Date | null;
+    private params!: IDateParams;
     public dd: string = '';
     public mm: string = '';
     public yyyy: string = '';
@@ -46,7 +45,7 @@ export class DateComponent implements OnDestroy, IDateAngularComp {
         this.params.onDateChanged();
     }
 
-    getDate(): Date {
+    getDate(): Date | null {
         return this.date;
     }
 
@@ -70,7 +69,7 @@ export class DateComponent implements OnDestroy, IDateAngularComp {
     //          INTERNAL LOGIC
     //*********************************************************************************
 
-    parseDate(dd, mm, yyyy) {
+    parseDate(dd: string, mm: string, yyyy: string) {
         //If any of the three input date fields are empty, stop and return null
         if (dd.trim() === '' || mm.trim() === '' || yyyy.trim() === '') {
             return null;

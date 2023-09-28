@@ -14,6 +14,11 @@ import {RendererComponent} from './renderer-component/renderer.component';
 import {ProficiencyFilter} from "./filters/proficiency.component.filter";
 import {SkillFilter} from "./filters/skill.component.filter";
 
+import 'ag-grid-enterprise';
+// set your key here
+// import {LicenseManager} from "ag-grid-enterprise";
+// LicenseManager.setLicenseKey(<your key>);
+
 @NgModule({
     imports: [
         BrowserModule,
