@@ -1,5 +1,5 @@
 import {Component, ViewChild, ViewContainerRef} from "@angular/core";
-import {ColumnApi, GridApi} from "ag-grid-community";
+import {ColumnApi, GridApi, GridReadyEvent, ICellRendererParams} from "ag-grid-community";
 import {AgGridModule, ICellEditorAngularComp} from "ag-grid-angular";
 import { TestBed, waitForAsync } from "@angular/core/testing";
 import {FormsModule} from "@angular/forms";
@@ -11,7 +11,7 @@ import {FormsModule} from "@angular/forms";
 class RendererComponent {
     params: any;
 
-    public agInit(params) {
+    public agInit(params: ICellRendererParams) {
         this.params = params;
     }
 }
@@ -23,9 +23,9 @@ class RendererComponent {
 })
 export class EditorComponent implements ICellEditorAngularComp {
     private params: any;
-    public value: number;
+    public value!: number;
 
-    @ViewChild('input', {read: ViewContainerRef, static: false}) public input;
+    @ViewChild('input', {read: ViewContainerRef, static: false}) public input: any;
 
     agInit(params: any): void {
         this.params = params;
@@ -72,10 +72,10 @@ class TestHostComponent {
         {field: "number", colId: "renderer", headerName: "Renderer Value", cellRenderer: RendererComponent}
     ];
 
-    api: GridApi;
-    columnApi: ColumnApi;
+    api!: GridApi;
+    columnApi!: ColumnApi;
 
-    public onGridReady(params) {
+    public onGridReady(params: GridReadyEvent) {
         this.api = params.api;
         this.columnApi = params.columnApi;
     }
