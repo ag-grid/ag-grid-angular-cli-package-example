@@ -1,5 +1,5 @@
 import {Component, ViewChild, ViewContainerRef} from "@angular/core";
-import {ColumnApi, GridApi, GridReadyEvent, ICellRendererParams} from "ag-grid-community";
+import {GridApi, GridReadyEvent, ICellRendererParams} from "ag-grid-community";
 import {AgGridModule, ICellEditorAngularComp} from "ag-grid-angular";
 import { TestBed, waitForAsync } from "@angular/core/testing";
 import {FormsModule} from "@angular/forms";
@@ -73,11 +73,9 @@ class TestHostComponent {
     ];
 
     api!: GridApi;
-    columnApi!: ColumnApi;
 
     public onGridReady(params: GridReadyEvent) {
         this.api = params.api;
-        this.columnApi = params.columnApi;
     }
 }
 
