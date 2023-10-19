@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ColDef, ColGroupDef, ICellRendererParams, CellContextMenuEvent, CellDoubleClickedEvent, CellClickedEvent, GridReadyEvent, GridApi, ColumnApi } from 'ag-grid-community';
+import { ColDef, ColGroupDef, ICellRendererParams, CellContextMenuEvent, CellDoubleClickedEvent, CellClickedEvent, GridReadyEvent, GridApi } from 'ag-grid-community';
 
 import { ProficiencyFilter } from '../filters/proficiency.component.filter';
 import { SkillFilter } from '../filters/skill.component.filter';
