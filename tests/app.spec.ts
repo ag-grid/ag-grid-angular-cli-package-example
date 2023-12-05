@@ -1,6 +1,6 @@
 import {Component, ViewChild, ViewContainerRef} from "@angular/core";
 import {GridApi, GridReadyEvent, ICellRendererParams} from "ag-grid-community";
-import {AgGridModule, ICellEditorAngularComp} from "ag-grid-angular";
+import {AgGridAngular, ICellEditorAngularComp} from "ag-grid-angular";
 import { TestBed, waitForAsync } from "@angular/core/testing";
 import {FormsModule} from "@angular/forms";
 
@@ -87,7 +87,7 @@ describe('angular-cli App', function () {
         TestBed.configureTestingModule({
             imports: [
                 FormsModule,
-                AgGridModule
+                AgGridAngular
             ],
             declarations: [TestHostComponent, RendererComponent, EditorComponent]
         }).compileComponents();
