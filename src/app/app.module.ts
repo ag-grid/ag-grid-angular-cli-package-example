@@ -2,7 +2,7 @@ import {NgModule} from "@angular/core";
 import {BrowserModule} from "@angular/platform-browser";
 import {FormsModule} from "@angular/forms";
 // ag-grid
-import {AgGridModule} from "ag-grid-angular";
+import {AgGridAngular} from "ag-grid-angular";
 // application
 import {AppComponent} from "./app.component";
 // rich grid
@@ -23,7 +23,7 @@ import 'ag-grid-enterprise';
     imports: [
         BrowserModule,
         FormsModule,
-        AgGridModule
+        AgGridAngular
     ],
     declarations: [
         AppComponent,
