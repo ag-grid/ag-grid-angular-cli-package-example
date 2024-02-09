@@ -214,20 +214,16 @@ export class RichGridComponent {
     }
 
     public invokeSkillsFilterMethod() {
-        this.api.getFilterInstance('skills', (instance) => {
+        this.api.getColumnFilterInstance('skills').then((instance) => {
             (instance as any).helloFromSkillsFilter();
         });
     }
 
     public dobFilter() {
-        this.api.getFilterInstance('dob', (dateFilterComponent: any) => {
-            dateFilterComponent.setModel({
-                type: 'equals',
-                dateFrom: '2000-01-01'
-            });
-
-            this.api.onFilterChanged();
-        });
+        this.api.setColumnFilterModel('dob', {
+            type: 'equals',
+            dateFrom: '2000-01-01'
+        }).then(() => this.api.onFilterChanged());
     }
 
     public toggleSidebar($event: any) {
